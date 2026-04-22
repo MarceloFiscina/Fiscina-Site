@@ -168,15 +168,25 @@
       display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       border: 1px solid var(--border); background: var(--border); gap: 1px;
     }
+    /* Efeito de Vidro e Profundidade nos Cards */
     .svc-card {
-      background: var(--bg); padding: 48px 36px;
-      position: relative; overflow: hidden; transition: transform .3s;
+      background: linear-gradient(145deg, var(--bg3), var(--bg));
+      padding: 48px 36px;
+      border: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .svc-card:hover {
+      transform: translateY(-10px);
+      border-color: rgba(249, 115, 22, 0.4);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 20px var(--oglow);
     }
     .svc-card::after {
       content:''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
       background: var(--orange); transform: scaleX(0); transform-origin: left; transition: transform .35s;
     }
-    .svc-card:hover { transform: translateY(-4px); }
+    
     .svc-card:hover::after { transform: scaleX(1); }
     .svc-icon { font-size: 2.5rem; margin-bottom: 20px; display: block; line-height: 1; }
     .svc-title { font-family: var(--hfont); font-size: 1.55rem; font-weight: 700; text-transform: uppercase; margin-bottom: 10px; line-height: 1.1; }
@@ -188,7 +198,19 @@
     .svc-list strong { color: var(--white); font-weight: 600; }
     .svc-link { color: var(--orange); font-size: .85rem; font-weight: 600; letter-spacing: .04em; display: inline-flex; align-items: center; gap: 6px; transition: gap .2s, color .2s; }
     .svc-link:hover { gap: 10px; color: var(--orange2); }
-    .svc-num { position: absolute; bottom: 20px; right: 24px; font-family: var(--hfont); font-size: 5rem; font-weight: 700; color: rgba(249,115,22,.05); line-height: 1; pointer-events: none; }
+    /* Melhoria na Numeração de Fundo */
+    .svc-num {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-family: var(--hfont);
+      font-size: 4rem;
+      font-weight: 800;
+      background: linear-gradient(to bottom, rgba(249,115,22,0.1), transparent);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      pointer-events: none;
+    }
 
     .svc-wide { grid-column: 1 / -1; background: var(--bg); padding: 40px 44px; position: relative; overflow: hidden; }
     .svc-wide::after { content:''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--orange), var(--orange2)); }
@@ -379,12 +401,9 @@
         Engenharia aplicada para aumentar produtividade e executar projetos completos.
       </span>
       <p>
-        Unimos automação industrial e estruturas metálicas para entregar soluções completas — da obra física ao controle do processo.
+        Engenharia completa da infraestrutura ao controle. Entregamos soluções integradas que unem a solidez das estruturas metálicas à inteligência da automação industrial.
       </p>
     </h1>
-    <p class="hero-desc">
-      Somos uma emprresa de engenharia especializada com experiência em campo em estruturas metálicas e automação industrial e residencial. Do galpão à fábrica, da instalação ao sistema de controle — soluções completas no Recôncavo Baiano.
-    </p>
     <p style="margin-top:10px; color:#94a3b8; font-size:.9rem;">
       Especialistas em automação industrial e estruturas metálicas na Bahia — atendendo Catu, Alagoinhas e Pojuca.
     </p>
@@ -414,45 +433,47 @@
   <div class="svc-grid">
 
     <div class="svc-card">
-      <span class="svc-icon">⚙️</span>
-      <div class="svc-title">Automação Industrial</div>
-      <div class="svc-sub">Controle inteligente do seu processo</div>
-      <p class="svc-desc">Programação de CLPs, sistemas SCADA, redes industriais e Indústria 4.0. Otimize sua produção com tecnologia de ponta.</p>
+      <span class="svc-num">01</span>
+      <span class="svc-icon-wrapper">⚙️</span>
+      <div class="svc-title">Automação & Indústria 4.0</div>
+      <div class="svc-sub">Inteligência de Dados e Controle de Processos</div>
+      <p class="svc-desc">Implementação de arquiteturas robustas para maximizar o OEE (Eficiência Global do Equipamento) e garantir a continuidade operacional.</p>
       <ul class="svc-list">
-        <li><strong>CLPs e SCADA</strong> — Siemens, Rockwell, Schneider</li>
-        <li><strong>Redes Industriais & IIoT</strong> — Profinet, Profibus, MQTT, OPC-UA</li>
-        <li><strong>Painéis Elétricos</strong> — Projeto e execução (NR10 / NR12)</li>
-        <li><strong>Diagnóstico e Suporte</strong> — Manutenção especializada em campo</li>
+        <li><strong>Sistemas Críticos:</strong> Programação avançada de CLPs e IHM (Siemens TIA Portal, Rockwell, Schneider)</li>
+        <li><strong>Conectividade:</strong> Integração de redes industriais via Ethernet, DeviceNet,Profinet,Profibus MQTT e OPC-UA</li>
+        <li><strong>Dashboards:</strong> Visualização de KPIs em tempo real com Grafana e SQL Server</li>
+        <li><strong>Retrofit:</strong> Modernização de máquinas antigas com foco em NR12</li>
       </ul>
       <a href="https://wa.me/5575998828918?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20Automação%20Industrial." target="_blank" class="svc-link">Falar com Marcelo →</a>
       <span class="svc-num">01</span>
     </div>
 
     <div class="svc-card">
-      <span class="svc-icon">🏗️</span>
+      <span class="svc-num">02</span>
+      <span class="svc-icon-wrapper">🏗️</span>
       <div class="svc-title">Estruturas Metálicas</div>
-      <div class="svc-sub">Solidez, durabilidade e segurança</div>
-      <p class="svc-desc">Montagem de galpões, coberturas e estruturas metálicas industriais e comerciais. Execução conforme normas técnicas e dentro do prazo.</p>
+      <div class="svc-sub">Projetos de Alta Complexidade e Rigor Técnico</div>
+      <p class="svc-desc">Soluções em aço com foco em durabilidade, otimização de peso e velocidade de montagem para o setor industrial e logístico.</p>
       <ul class="svc-list">
-        <li><strong>Galpões Industriais e Comerciais</strong> — pequeno a grande porte</li>
-        <li><strong>Coberturas e Telhados Técnicos</strong> — telhas metálicas, sanduíche e translúcidas</li>
-        <li><strong>Mezaninos e Plataformas</strong> — otimização de espaço</li>
-        <li><strong>Reforma e Ampliação Estrutural</strong> — conforme NR35</li>
+        <li><strong>Galpões de Grande Porte:</strong> Dimensionamento otimizado para máxima área útil</li>
+        <li><strong>Sistemas de Cobertura:</strong> Isolamento termoacústico e telhados técnicos para climatização</li>
+        <li><strong>Mezaninos de Carga:</strong> Estruturas calculadas para suporte de maquinário pesado e estoques</li>
+        <li><strong>Rigor Normativo:</strong> Projetos executados sob estrita conformidade com a NR35 e normas de segurança</li>
       </ul>
       <a href="https://wa.me/5575999448040?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20Estruturas%20Metálicas." target="_blank" class="svc-link">Falar com Marlon →</a>
       <span class="svc-num">02</span>
     </div>
 
     <div class="svc-card">
-      <span class="svc-icon">🏠</span>
-      <div class="svc-title">Automação Residencial</div>
-      <div class="svc-sub">Casa inteligente, vida mais fácil</div>
-      <p class="svc-desc">Ambientes residenciais conectados com Home Assistant, ESP32 e protocolos modernos. Conforto, segurança e eficiência energética na palma da mão.</p>
+      <span class="svc-num">03</span>
+      <span class="svc-icon-wrapper">🏠</span>
+      <div class="svc-title">Smart Home & IoT</div>
+      <div class="svc-sub">Tecnologia Sem Limites e Totalmente Privada</div>
+      <p class="svc-desc">Diferente de soluções comuns, entregamos sistemas baseados em servidores locais, garantindo que seus dados nunca saiam da sua casa.</p>
       <ul class="svc-list">
-        <li><strong>Home Assistant & Node-RED</strong> — controle centralizado</li>
-        <li><strong>Iluminação, Clima e Segurança</strong> — integração total</li>
-        <li><strong>Zigbee, Z-Wave, Matter</strong> — protocolos modernos</li>
-        <li><strong>ESP32 e Arduino</strong> — soluções personalizadas</li>
+        <li><strong>Ecossistema Local:</strong> Centralização com Home Assistant e Node-RED (Sem mensalidades)</li>
+        <li><strong>Controle Total:</strong> Iluminação, climatização e segurança em uma única interface personalizada</li>
+        <li><strong>Customização:</strong> Desenvolvimento de hardware específico com ESP32 para funções exclusivas</li>
       </ul>
       <a href="https://wa.me/5575998828918?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20Automação%20Residencial." target="_blank" class="svc-link">Solicitar Orçamento →</a>
       <span class="svc-num">03</span>
