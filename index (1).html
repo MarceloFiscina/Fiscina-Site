@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fiscina Serviços Técnicos | Automação & Estruturas Metálicas</title>
+  <meta name="description" content="Fiscina Serviços Técnicos Ltda — Automação industrial, residencial e estruturas metálicas em Alagoinhas, Catu e Pojuca, Bahia. CNPJ: 24.064.246/0001-95">
+  <meta name="keywords" content="automação industrial, estruturas metálicas, engenharia, Catu, Alagoinhas, Pojuca, Bahia, NR10, NR12, NR35, CLPs, SCADA, galpões">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #0d1117;
+      --bg2:      #111820;
+      --bg3:      #161e28;
+      --panel:    #1a2332;
+      --panel2:   #1e2c3d;
+      --border:   rgba(255,255,255,0.07);
+      --orange:   #f97316;
+      --orange2:  #fb923c;
+      --oglow:    rgba(249,115,22,0.14);
+      --silver:   #94a3b8;
+      --silver2:  #cbd5e1;
+      --dim:      #475569;
+      --white:    #f1f5f9;
+      --hfont:    'Rajdhani', sans-serif;
+      --bfont:    'Inter', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--bfont); background: var(--bg); color: var(--white); overflow-x: hidden; }
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--orange); border-radius: 4px; }
+    a { text-decoration: none; color: inherit; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      height: 62px; display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5vw;
+      background: rgba(13,17,23,0.90); backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 10px;
+      font-family: var(--hfont); font-size: 1.35rem; font-weight: 700;
+      letter-spacing: .1em; text-transform: uppercase;
+    }
+    .logo-hex {
+      width: 34px; height: 34px; background: var(--orange); flex-shrink: 0;
+      clip-path: polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);
+      display: flex; align-items: center; justify-content: center;
+      font-size: .72rem; font-weight: 700; color: #fff;
+    }
+    .nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-family: var(--hfont); font-size: .9rem; font-weight: 600;
+      letter-spacing: .08em; text-transform: uppercase;
+      color: var(--silver); transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--orange); }
+    .nav-links .nav-cta { background: var(--orange); color: #fff !important; padding: 7px 18px; border-radius: 3px; }
+    .nav-links .nav-cta:hover { background: var(--orange2); }
+
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+    .hamburger span { width: 22px; height: 2px; background: var(--silver); display: block; transition: .3s; }
+
+    .mobile-menu {
+      display: none; position: fixed; top: 62px; left: 0; right: 0; z-index: 199;
+      background: rgba(13,17,23,.97); backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      flex-direction: column; padding: 8px 5vw 24px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: var(--hfont); font-size: 1.05rem; font-weight: 600;
+      letter-spacing: .08em; text-transform: uppercase;
+      color: var(--silver); padding: 14px 0;
+      border-bottom: 1px solid var(--border); transition: color .2s;
+    }
+    .mobile-menu a:last-child { border-bottom: none; }
+    .mobile-menu a:hover { color: var(--orange); }
+
+    /* ── HERO ── */
+    #home {
+      min-height: 100vh; display: flex; align-items: center;
+      padding: 100px 5vw 80px; position: relative; overflow: hidden;
+    }
+    .hero-grid {
+      position: absolute; inset: 0; pointer-events: none;
+      background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 75% 75% at 50% 50%, black 20%, transparent 100%);
+    }
+    .hero-glow {
+      position: absolute; right: -120px; top: 40%; transform: translateY(-50%);
+      width: 700px; height: 700px; pointer-events: none;
+      background: radial-gradient(circle, rgba(249,115,22,.08) 0%, transparent 65%);
+    }
+    .hero-inner { position: relative; z-index: 1; max-width: 840px; }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--oglow); border: 1px solid rgba(249,115,22,.3);
+      color: var(--orange2); padding: 5px 14px; border-radius: 2px;
+      font-family: var(--hfont); font-size: .76rem; font-weight: 700;
+      letter-spacing: .15em; text-transform: uppercase; margin-bottom: 24px;
+      animation: fadeUp .7s ease both;
+    }
+    .badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--orange); animation: blink 2s ease-in-out infinite; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.25} }
+
+    h1 {
+      font-family: var(--hfont);
+      font-size: clamp(2.8rem, 6.5vw, 6rem); font-weight: 700;
+      line-height: .95; text-transform: uppercase; letter-spacing: -.01em;
+      margin-bottom: 28px; animation: fadeUp .8s .1s ease both;
+    }
+    h1 .hl { color: var(--orange); }
+    h1 .sub { display: block; font-size: clamp(1.2rem, 2.8vw, 2.2rem); color: var(--silver); font-weight: 500; margin-top: 10px; }
+
+    .hero-desc {
+      font-size: 1.05rem; color: var(--silver); line-height: 1.75;
+      max-width: 580px; margin-bottom: 40px; animation: fadeUp .8s .2s ease both;
+    }
+    .hero-btns { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 60px; animation: fadeUp .8s .3s ease both; }
+    .btn-main {
+      background: var(--orange); color: #fff; padding: 13px 30px; border-radius: 3px;
+      border: 2px solid var(--orange); font-family: var(--hfont); font-size: .92rem; font-weight: 700;
+      letter-spacing: .07em; text-transform: uppercase;
+      display: inline-flex; align-items: center; gap: 8px; transition: background .2s, transform .15s;
+    }
+    .btn-main:hover { background: var(--orange2); transform: translateY(-2px); }
+    .btn-ghost {
+      background: transparent; color: var(--white); padding: 13px 30px; border-radius: 3px;
+      border: 2px solid rgba(148,163,184,.22); font-family: var(--hfont); font-size: .92rem; font-weight: 700;
+      letter-spacing: .07em; text-transform: uppercase;
+      display: inline-flex; align-items: center; gap: 8px; transition: border-color .2s, color .2s, transform .15s;
+    }
+    .btn-ghost:hover { border-color: var(--orange); color: var(--orange); transform: translateY(-2px); }
+
+    .hero-stats { display: flex; flex-wrap: wrap; gap: 40px; padding-top: 40px; border-top: 1px solid var(--border); animation: fadeUp .8s .4s ease both; }
+    .stat-n { font-family: var(--hfont); font-size: 2.6rem; font-weight: 700; color: var(--orange); line-height: 1; display: block; }
+    .stat-l { font-size: .7rem; color: var(--dim); letter-spacing: .1em; text-transform: uppercase; margin-top: 4px; }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(22px)} to{opacity:1;transform:translateY(0)} }
+
+    /* ── SECTIONS COMMONS ── */
+    section { padding: 100px 5vw; position: relative; z-index: 1; }
+    .sec-label {
+      display: flex; align-items: center; gap: 10px;
+      font-family: var(--hfont); font-size: .74rem; font-weight: 700;
+      letter-spacing: .2em; text-transform: uppercase; color: var(--orange); margin-bottom: 10px;
+    }
+    .sec-label::before { content:''; width: 28px; height: 2px; background: var(--orange); }
+    .sec-title { font-family: var(--hfont); font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 700; text-transform: uppercase; line-height: 1; margin-bottom: 14px; }
+    .sec-title .hl { color: var(--orange); }
+    .sec-desc { color: var(--silver); font-size: 1rem; line-height: 1.75; max-width: 600px; }
+    .section-header { margin-bottom: 64px; }
+
+    /* ── SERVICES ── */
+    #solucoes { background: var(--bg2); }
+    .svc-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      border: 1px solid var(--border); background: var(--border); gap: 1px;
+    }
+    .svc-card {
+      background: var(--bg); padding: 48px 36px;
+      position: relative; overflow: hidden; transition: transform .3s;
+    }
+    .svc-card::after {
+      content:''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: var(--orange); transform: scaleX(0); transform-origin: left; transition: transform .35s;
+    }
+    .svc-card:hover { transform: translateY(-4px); }
+    .svc-card:hover::after { transform: scaleX(1); }
+    .svc-icon { font-size: 2.5rem; margin-bottom: 20px; display: block; line-height: 1; }
+    .svc-title { font-family: var(--hfont); font-size: 1.55rem; font-weight: 700; text-transform: uppercase; margin-bottom: 10px; line-height: 1.1; }
+    .svc-sub { color: var(--orange2); font-size: .85rem; font-weight: 600; margin-bottom: 14px; }
+    .svc-desc { color: var(--silver); font-size: .92rem; line-height: 1.7; margin-bottom: 20px; }
+    .svc-list { list-style: none; display: flex; flex-direction: column; gap: 8px; margin-bottom: 24px; }
+    .svc-list li { color: var(--silver2); font-size: .88rem; line-height: 1.5; padding-left: 20px; position: relative; }
+    .svc-list li::before { content:'▸'; position: absolute; left: 0; color: var(--orange); font-size: .8rem; }
+    .svc-list strong { color: var(--white); font-weight: 600; }
+    .svc-link { color: var(--orange); font-size: .85rem; font-weight: 600; letter-spacing: .04em; display: inline-flex; align-items: center; gap: 6px; transition: gap .2s, color .2s; }
+    .svc-link:hover { gap: 10px; color: var(--orange2); }
+    .svc-num { position: absolute; bottom: 20px; right: 24px; font-family: var(--hfont); font-size: 5rem; font-weight: 700; color: rgba(249,115,22,.05); line-height: 1; pointer-events: none; }
+
+    .svc-wide { grid-column: 1 / -1; background: var(--bg); padding: 40px 44px; position: relative; overflow: hidden; }
+    .svc-wide::after { content:''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--orange), var(--orange2)); }
+    .svc-wide-inner { display: flex; gap: 32px; align-items: flex-start; }
+    .svc-wide-icon { font-size: 2.5rem; flex-shrink: 0; margin-top: 4px; }
+    .svc-wide-title { font-family: var(--hfont); font-size: 1.55rem; font-weight: 700; text-transform: uppercase; margin-bottom: 10px; }
+    .svc-wide-desc { color: var(--silver); font-size: .92rem; line-height: 1.7; margin-bottom: 18px; }
+    .svc-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+    .chip { background: var(--oglow); border: 1px solid rgba(249,115,22,.25); color: var(--orange2); font-size: .72rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; padding: 4px 12px; border-radius: 2px; }
+
+    /* ── PROJECTS ── */
+    #projetos { background: var(--bg3); }
+    .proj-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2px; background: var(--border); border: 1px solid var(--border);
+    }
+    .proj-card { position: relative; overflow: hidden; aspect-ratio: 16/10; background: var(--panel); cursor: default; }
+    .proj-card img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease; filter: brightness(.7); }
+    .proj-card:hover img { transform: scale(1.06); filter: brightness(.45); }
+    .proj-strip {
+      position: absolute; bottom: 0; left: 0; right: 0; padding: 18px 20px 16px;
+      background: linear-gradient(to top, rgba(13,17,23,.9) 0%, transparent 100%);
+    }
+    .proj-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(13,17,23,.92) 0%, transparent 55%);
+      display: flex; flex-direction: column; justify-content: flex-end; padding: 24px;
+      opacity: 0; transition: opacity .3s;
+    }
+    .proj-card:hover .proj-overlay { opacity: 1; }
+    .proj-name { font-family: var(--hfont); font-size: 1.05rem; font-weight: 700; text-transform: uppercase; line-height: 1.1; }
+    .proj-loc { font-size: .72rem; color: var(--orange2); letter-spacing: .06em; margin-top: 3px; }
+    .proj-desc { font-size: .84rem; color: var(--silver2); line-height: 1.55; margin-bottom: 10px; }
+    .proj-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .proj-tag { background: rgba(249,115,22,.15); border: 1px solid rgba(249,115,22,.3); color: var(--orange); font-size: .67rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 3px 8px; border-radius: 2px; }
+    .proj-no-img { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 3rem; background: var(--panel2); }
+
+    /* ── EQUIPE ── */
+    #equipe { background: var(--bg2); }
+    .team-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: var(--border); border: 1px solid var(--border); }
+    .team-card { background: var(--bg); padding: 52px 44px; position: relative; overflow: hidden; }
+    .team-card::before { content:''; position: absolute; top: 0; left: 0; bottom: 0; width: 3px; background: var(--orange); }
+    .team-role { font-family: var(--hfont); font-size: .74rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--orange); margin-bottom: 8px; }
+    .team-name { font-family: var(--hfont); font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 700; text-transform: uppercase; line-height: 1; margin-bottom: 20px; }
+    .team-desc { color: var(--silver); font-size: .92rem; line-height: 1.75; margin-bottom: 24px; }
+    .team-skills { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; }
+    .skill-tag { background: var(--panel2); border: 1px solid var(--border); color: var(--silver2); font-size: .72rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; padding: 4px 12px; border-radius: 2px; }
+    .team-contact { display: flex; flex-direction: column; gap: 10px; }
+    .team-contact a { display: inline-flex; align-items: center; gap: 8px; color: var(--silver); font-size: .88rem; transition: color .2s; }
+    .team-contact a:hover { color: var(--orange); }
+    .team-contact svg { width: 16px; height: 16px; flex-shrink: 0; }
+    .team-bg-num { position: absolute; bottom: -10px; right: 20px; font-family: var(--hfont); font-size: 9rem; font-weight: 700; color: rgba(249,115,22,.04); line-height: 1; pointer-events: none; }
+
+    /* ── POR QUE ── */
+    #por-que { background: var(--bg); }
+    .why-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; background: var(--border); border: 1px solid var(--border); }
+    .why-card { background: var(--bg2); padding: 40px 32px; border-top: 3px solid transparent; transition: border-color .3s, background .3s; }
+    .why-card:hover { border-top-color: var(--orange); background: var(--panel); }
+    .why-icon { font-size: 2rem; margin-bottom: 16px; display: block; }
+    .why-title { font-family: var(--hfont); font-size: 1.15rem; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; margin-bottom: 8px; }
+    .why-desc { color: var(--silver); font-size: .88rem; line-height: 1.65; }
+
+    /* ── CONTATO ── */
+    #contato { background: var(--bg3); }
+    .contact-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+    .contact-cta-title { font-family: var(--hfont); font-size: clamp(2rem,4vw,3rem); font-weight: 700; text-transform: uppercase; line-height: 1; margin-bottom: 20px; }
+    .contact-cta-title .hl { color: var(--orange); }
+    .contact-desc { color: var(--silver); font-size: .98rem; line-height: 1.75; margin-bottom: 36px; }
+    .contact-btns { display: flex; flex-direction: column; gap: 12px; }
+    .wa-btn { display: flex; align-items: center; gap: 14px; background: var(--panel); border: 1px solid var(--border); padding: 18px 22px; border-radius: 4px; transition: border-color .2s, background .2s; }
+    .wa-btn:hover { border-color: var(--orange); background: var(--panel2); }
+    .wa-icon { width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+    .wa-green { background: rgba(34,197,94,.15); }
+    .wa-orange { background: var(--oglow); }
+    .wa-name { font-family: var(--hfont); font-size: 1rem; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; }
+    .wa-role { font-size: .78rem; color: var(--silver); margin-top: 2px; }
+    .contact-info { display: flex; flex-direction: column; }
+    .info-row { display: flex; align-items: flex-start; gap: 16px; padding: 22px 0; border-bottom: 1px solid var(--border); }
+    .info-row:last-child { border-bottom: none; }
+    .info-icon { width: 40px; height: 40px; flex-shrink: 0; background: var(--oglow); border: 1px solid rgba(249,115,22,.2); border-radius: 3px; display: flex; align-items: center; justify-content: center; font-size: 1rem; }
+    .info-label { font-size: .72rem; color: var(--dim); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 4px; }
+    .info-val { font-size: .95rem; font-weight: 500; color: var(--white); line-height: 1.6; }
+    .info-val a { color: var(--white); transition: color .2s; }
+    .info-val a:hover { color: var(--orange); }
+
+    /* ── FOOTER ── */
+    footer { background: #080d12; padding: 48px 5vw 28px; border-top: 1px solid var(--border); }
+    .footer-inner { display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 48px; margin-bottom: 40px; }
+    .footer-brand { font-family: var(--hfont); font-size: 1.2rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 8px; }
+    .footer-brand span { color: var(--orange); }
+    .footer-tagline { font-size: .83rem; color: var(--dim); line-height: 1.6; }
+    .footer-cnpj { font-size: .75rem; color: var(--dim); margin-top: 10px; }
+    footer h4 { font-family: var(--hfont); font-size: .88rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--silver2); margin-bottom: 14px; }
+    footer ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    footer li a { font-size: .83rem; color: var(--dim); transition: color .2s; }
+    footer li a:hover { color: var(--orange); }
+    .footer-bottom { border-top: 1px solid var(--border); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
+    .footer-copy { font-size: .78rem; color: var(--dim); }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a { font-size: .78rem; color: var(--dim); transition: color .2s; }
+    .footer-links a:hover { color: var(--orange); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .team-grid { grid-template-columns: 1fr; }
+      .contact-wrap { grid-template-columns: 1fr; gap: 40px; }
+      .footer-inner { grid-template-columns: 1fr 1fr; }
+      .why-grid { grid-template-columns: repeat(2,1fr); }
+    }
+    @media (max-width: 600px) {
+      section { padding: 72px 5vw; }
+      .svc-wide-inner { flex-direction: column; }
+      .footer-inner { grid-template-columns: 1fr; gap: 32px; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+      .why-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#home" class="nav-logo">
+    <div class="logo-hex">F</div>
+    FISCINA
+  </a>
+  <ul class="nav-links">
+    <li><a href="#solucoes">Soluções</a></li>
+    <li><a href="#projetos">Projetos</a></li>
+    <li><a href="#equipe">Equipe</a></li>
+    <li><a href="#por-que">Por que Fiscina</a></li>
+    <li><a href="#contato" class="nav-cta">Fale Conosco</a></li>
+  </ul>
+  <div class="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#solucoes"  onclick="toggleMenu()">Soluções</a>
+  <a href="#projetos"  onclick="toggleMenu()">Projetos</a>
+  <a href="#equipe"    onclick="toggleMenu()">Equipe</a>
+  <a href="#por-que"   onclick="toggleMenu()">Por que Fiscina</a>
+  <a href="#contato"   onclick="toggleMenu()">Fale Conosco</a>
+</div>
+
+
+<!-- HERO -->
+<section id="home">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-inner">
+    <div class="hero-badge">
+      <div class="badge-dot"></div>
+      Alagoinhas · Catu · Pojuca — BA
+    </div>
+    <h1>
+      Estruturas &amp; <span class="hl">Automação</span>
+      <span class="sub">Engenharia que constrói resultados</span>
+    </h1>
+    <p class="hero-desc">
+      Somos uma empresa familiar de engenharia especializada em estruturas metálicas e automação industrial e residencial. Do galpão à fábrica, da instalação ao sistema de controle — soluções completas no Recôncavo Baiano.
+    </p>
+    <div class="hero-btns">
+      <a href="https://wa.me/5575998828918?text=Olá!%20Gostaria%20de%20conhecer%20as%20soluções%20da%20Fiscina." target="_blank" class="btn-main">
+        &#128172; Solicitar Orçamento
+      </a>
+      <a href="#solucoes" class="btn-ghost">Ver Soluções ↓</a>
+    </div>
+    <div class="hero-stats">
+      <div><span class="stat-n">+10</span><span class="stat-l">Anos de Experiência</span></div>
+      <div><span class="stat-n">50+</span><span class="stat-l">Projetos Entregues</span></div>
+      <div><span class="stat-n">2</span><span class="stat-l">Engenheiros Sócios</span></div>
+      <div><span class="stat-n">100%</span><span class="stat-l">Conformidade NRs</span></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- SOLUÇÕES -->
+<section id="solucoes">
+  <div class="section-header">
+    <div class="sec-label">O que fazemos</div>
+    <div class="sec-title">Nossas <span class="hl">Soluções</span></div>
+    <p class="sec-desc">Precisão e inovação em cada projeto. Da estrutura à automação, entregamos engenharia completa.</p>
+  </div>
+  <div class="svc-grid">
+
+    <div class="svc-card">
+      <span class="svc-icon">⚙️</span>
+      <div class="svc-title">Automação Industrial</div>
+      <div class="svc-sub">Controle inteligente do seu processo</div>
+      <p class="svc-desc">Programação de CLPs, sistemas SCADA, redes industriais e Indústria 4.0. Otimize sua produção com tecnologia de ponta.</p>
+      <ul class="svc-list">
+        <li><strong>CLPs e SCADA</strong> — Siemens, Rockwell, Schneider</li>
+        <li><strong>Redes Industriais & IIoT</strong> — Profinet, Profibus, MQTT, OPC-UA</li>
+        <li><strong>Painéis Elétricos</strong> — Projeto e execução (NR10 / NR12)</li>
+        <li><strong>Diagnóstico e Suporte</strong> — Manutenção especializada em campo</li>
+      </ul>
+      <a href="https://wa.me/5575998828918?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20Automação%20Industrial." target="_blank" class="svc-link">Falar com Marcelo →</a>
+      <span class="svc-num">01</span>
+    </div>
+
+    <div class="svc-card">
+      <span class="svc-icon">🏗️</span>
+      <div class="svc-title">Estruturas Metálicas</div>
+      <div class="svc-sub">Solidez, durabilidade e segurança</div>
+      <p class="svc-desc">Montagem de galpões, coberturas e estruturas metálicas industriais e comerciais. Execução conforme normas técnicas e dentro do prazo.</p>
+      <ul class="svc-list">
+        <li><strong>Galpões Industriais e Comerciais</strong> — pequeno a grande porte</li>
+        <li><strong>Coberturas e Telhados Técnicos</strong> — telhas metálicas, sanduíche e translúcidas</li>
+        <li><strong>Mezaninos e Plataformas</strong> — otimização de espaço</li>
+        <li><strong>Reforma e Ampliação Estrutural</strong> — conforme NR35</li>
+      </ul>
+      <a href="https://wa.me/5575999448040?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20Estruturas%20Metálicas." target="_blank" class="svc-link">Falar com Marlon →</a>
+      <span class="svc-num">02</span>
+    </div>
+
+    <div class="svc-card">
+      <span class="svc-icon">🏠</span>
+      <div class="svc-title">Automação Residencial</div>
+      <div class="svc-sub">Casa inteligente, vida mais fácil</div>
+      <p class="svc-desc">Ambientes residenciais conectados com Home Assistant, ESP32 e protocolos modernos. Conforto, segurança e eficiência energética na palma da mão.</p>
+      <ul class="svc-list">
+        <li><strong>Home Assistant & Node-RED</strong> — controle centralizado</li>
+        <li><strong>Iluminação, Clima e Segurança</strong> — integração total</li>
+        <li><strong>Zigbee, Z-Wave, Matter</strong> — protocolos modernos</li>
+        <li><strong>ESP32 e Arduino</strong> — soluções personalizadas</li>
+      </ul>
+      <a href="https://wa.me/5575998828918?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20Automação%20Residencial." target="_blank" class="svc-link">Solicitar Orçamento →</a>
+      <span class="svc-num">03</span>
+    </div>
+
+    <div class="svc-wide">
+      <div class="svc-wide-inner">
+        <span class="svc-wide-icon">💡</span>
+        <div>
+          <div class="svc-wide-title">Consultoria e Otimização de Processos</div>
+          <p class="svc-wide-desc">Orientamos sua empresa na adoção das melhores tecnologias e práticas de engenharia. Diagnóstico completo, roadmap de transformação digital e implementação da Indústria 4.0.</p>
+          <div class="svc-chips">
+            <span class="chip">Diagnóstico Técnico</span>
+            <span class="chip">Indústria 4.0</span>
+            <span class="chip">Treinamentos</span>
+            <span class="chip">Dashboards e KPIs</span>
+            <span class="chip">IIoT</span>
+          </div>
+          <a href="https://wa.me/5575998828918?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20Consultoria." target="_blank" class="svc-link">Falar com nosso consultor →</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- PROJETOS -->
+<section id="projetos">
+  <div class="section-header">
+    <div class="sec-label">Portfólio</div>
+    <div class="sec-title">Nossos <span class="hl">Projetos</span></div>
+    <p class="sec-desc">Resultados reais entregues na região. Expertise em ação.</p>
+  </div>
+  <div class="proj-grid">
+
+    <div class="proj-card">
+      <div class="proj-no-img">⚙️</div>
+      <div class="proj-strip">
+        <div class="proj-name">Automação Automobilística</div>
+        <div class="proj-loc">Indústria Automotiva</div>
+      </div>
+      <div class="proj-overlay">
+        <p class="proj-desc">Otimização de linhas de montagem com robótica colaborativa. Redução de 15% no tempo de ciclo e aumento de 20% na qualidade.</p>
+        <div class="proj-tags"><span class="proj-tag">Siemens</span><span class="proj-tag">Rockwell</span><span class="proj-tag">SCADA</span></div>
+      </div>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-no-img">🍺</div>
+      <div class="proj-strip">
+        <div class="proj-name">Automação Cervejeira</div>
+        <div class="proj-loc">Indústria de Bebidas</div>
+      </div>
+      <div class="proj-overlay">
+        <p class="proj-desc">Automação completa de linhas de envase e pasteurização. Aumento de 25% na velocidade de produção e redução de perdas em 5%.</p>
+        <div class="proj-tags"><span class="proj-tag">CLPs</span><span class="proj-tag">IIoT</span><span class="proj-tag">Node-RED</span></div>
+      </div>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-no-img">🏭</div>
+      <div class="proj-strip">
+        <div class="proj-name">Automação Metalúrgica</div>
+        <div class="proj-loc">Indústria Metalúrgica — Pojuca / BA</div>
+      </div>
+      <div class="proj-overlay">
+        <p class="proj-desc">Controle de fornos de tratamento térmico, SCADA com banco SQL e dashboards de produção em tempo real.</p>
+        <div class="proj-tags"><span class="proj-tag">Schneider</span><span class="proj-tag">Elipse SCADA</span><span class="proj-tag">SQL</span></div>
+      </div>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-no-img">🏗️</div>
+      <div class="proj-strip">
+        <div class="proj-name">Galpão Logístico</div>
+        <div class="proj-loc">Catu / BA</div>
+      </div>
+      <div class="proj-overlay">
+        <p class="proj-desc">Montagem de estrutura metálica de 2.500m² para centro de distribuição. Entregue em 90 dias, 15% abaixo do orçamento.</p>
+        <div class="proj-tags"><span class="proj-tag">Estrutura Metálica</span><span class="proj-tag">2.500 m²</span></div>
+      </div>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-no-img">🏠</div>
+      <div class="proj-strip">
+        <div class="proj-name">Cobertura Industrial</div>
+        <div class="proj-loc">Alagoinhas / BA</div>
+      </div>
+      <div class="proj-overlay">
+        <p class="proj-desc">Instalação de cobertura em telha sanduíche para fábrica de alimentos. Redução de 5°C na temperatura interna.</p>
+        <div class="proj-tags"><span class="proj-tag">Cobertura</span><span class="proj-tag">Telha Sanduíche</span></div>
+      </div>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-no-img">📐</div>
+      <div class="proj-strip">
+        <div class="proj-name">Mezanino Industrial</div>
+        <div class="proj-loc">Região Metropolitana / BA</div>
+      </div>
+      <div class="proj-overlay">
+        <p class="proj-desc">Construção de mezanino para otimização de espaço em indústria. Aumento de área útil em 30%.</p>
+        <div class="proj-tags"><span class="proj-tag">Mezanino</span><span class="proj-tag">NR35</span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- EQUIPE -->
+<section id="equipe">
+  <div class="section-header">
+    <div class="sec-label">Nossa Equipe</div>
+    <div class="sec-title">Os <span class="hl">Sócios</span></div>
+    <p class="sec-desc">Dois irmãos, duas especialidades, uma empresa. Cobertura completa do projeto à entrega.</p>
+  </div>
+  <div class="team-grid">
+
+    <div class="team-card">
+      <div class="team-role">Eng. de Controle & Automação</div>
+      <div class="team-name">José Marcelo<br>Fiscina</div>
+      <p class="team-desc">
+        Mais de 10 anos de experiência em automação industrial, dados e integração de sistemas. Atuação nos setores automobilístico e metalúrgico, especializado em CLPs, SCADA, Indústria 4.0 e automação residencial com Home Assistant e IIoT.
+      </p>
+      <div class="team-skills">
+        <span class="skill-tag">Siemens TIA Portal</span>
+        <span class="skill-tag">Rockwell</span>
+        <span class="skill-tag">Schneider</span>
+        <span class="skill-tag">SCADA</span>
+        <span class="skill-tag">Node-RED</span>
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">Grafana</span>
+        <span class="skill-tag">Home Assistant</span>
+      </div>
+      <div class="team-contact">
+        <a href="https://wa.me/5575998828918" target="_blank">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.11 1.523 5.84L.057 23.5l5.802-1.522A11.942 11.942 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.808 9.808 0 01-5.006-1.372l-.36-.214-3.44.903.918-3.352-.234-.374A9.822 9.822 0 012.182 12c0-5.414 4.404-9.818 9.818-9.818 5.414 0 9.818 4.404 9.818 9.818 0 5.414-4.404 9.818-9.818 9.818z"/></svg>
+          (75) 99882-8918 — Automação
+        </a>
+        <a href="mailto:fiscina.marcelo@gmail.com">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          fiscina.marcelo@gmail.com
+        </a>
+        <a href="https://linkedin.com/in/marcelo-fiscina" target="_blank">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+          linkedin.com/in/marcelo-fiscina
+        </a>
+      </div>
+      <div class="team-bg-num">M</div>
+    </div>
+
+    <div class="team-card">
+      <div class="team-role">Engenheiro Elétrico</div>
+      <div class="team-name">Marlon<br>Fiscina</div>
+      <p class="team-desc">
+        Engenheiro Elétrico especializado em instalações elétricas e estruturas metálicas industriais. Coordena e acompanha obras de pequeno e grande porte — às vezes múltiplas obras simultaneamente — garantindo execução técnica, segurança e entrega dentro do prazo e orçamento.
+      </p>
+      <div class="team-skills">
+        <span class="skill-tag">Instalações Elétricas</span>
+        <span class="skill-tag">Estruturas Metálicas</span>
+        <span class="skill-tag">Galpões</span>
+        <span class="skill-tag">Coberturas</span>
+        <span class="skill-tag">NR10</span>
+        <span class="skill-tag">NR12</span>
+        <span class="skill-tag">NR35</span>
+        <span class="skill-tag">Gestão de Obras</span>
+      </div>
+      <div class="team-contact">
+        <a href="https://wa.me/5575999448040" target="_blank">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.11 1.523 5.84L.057 23.5l5.802-1.522A11.942 11.942 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.808 9.808 0 01-5.006-1.372l-.36-.214-3.44.903.918-3.352-.234-.374A9.822 9.822 0 012.182 12c0-5.414 4.404-9.818 9.818-9.818 5.414 0 9.818 4.404 9.818 9.818 0 5.414-4.404 9.818-9.818 9.818z"/></svg>
+          (75) 99944-8040 — Estruturas
+        </a>
+        <a href="mailto:Eng.marlon.fiscina@gmail.com">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Eng.marlon.fiscina@gmail.com
+        </a>
+      </div>
+      <div class="team-bg-num">M</div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- POR QUE FISCINA -->
+<section id="por-que">
+  <div class="section-header">
+    <div class="sec-label">Nossos Diferenciais</div>
+    <div class="sec-title">Por que <span class="hl">Fiscina?</span></div>
+    <p class="sec-desc">Expertise integrada que faz a diferença — do planejamento à entrega.</p>
+  </div>
+  <div class="why-grid">
+    <div class="why-card">
+      <span class="why-icon">🎯</span>
+      <div class="why-title">Expertise Integrada</div>
+      <p class="why-desc">Automação e estruturas metálicas sob um único padrão de excelência. Você não precisa de duas empresas diferentes.</p>
+    </div>
+    <div class="why-card">
+      <span class="why-icon">📍</span>
+      <div class="why-title">Presença Regional</div>
+      <p class="why-desc">Empresa local com atendimento ágil em Catu, Alagoinhas e Pojuca — e disponível para projetos em todo o estado da Bahia.</p>
+    </div>
+    <div class="why-card">
+      <span class="why-icon">📊</span>
+      <div class="why-title">Resultados Comprovados</div>
+      <p class="why-desc">Foco em ROI real — redução de paradas, aumento de produtividade e entregas dentro do orçamento e cronograma.</p>
+    </div>
+    <div class="why-card">
+      <span class="why-icon">✅</span>
+      <div class="why-title">Conformidade Total</div>
+      <p class="why-desc">Todos os projetos em conformidade com NR10, NR12 e NR35. Segurança não é opcional.</p>
+    </div>
+    <div class="why-card">
+      <span class="why-icon">🏗️</span>
+      <div class="why-title">Do Projeto à Entrega</div>
+      <p class="why-desc">Gerenciamos o projeto completo — da concepção ao comissionamento — com engenheiros presentes em campo.</p>
+    </div>
+    <div class="why-card">
+      <span class="why-icon">⚡</span>
+      <div class="why-title">Atendimento Ágil</div>
+      <p class="why-desc">Suporte rápido e dedicado. Quando sua planta ou obra para, o tempo conta — e nós sabemos disso.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- CONTATO -->
+<section id="contato">
+  <div class="contact-wrap">
+    <div>
+      <div class="sec-label">Vamos Conversar</div>
+      <div class="contact-cta-title">Pronto para o<br><span class="hl">seu projeto?</span></div>
+      <p class="contact-desc">
+        Fale diretamente com o especialista certo. Para automação industrial ou residencial, fale com Marcelo. Para estruturas metálicas e instalações, fale com Marlon.
+      </p>
+      <div class="contact-btns">
+        <a href="https://wa.me/5575998828918?text=Olá!%20Gostaria%20de%20falar%20sobre%20Automação." target="_blank" class="wa-btn">
+          <div class="wa-icon wa-green">💬</div>
+          <div>
+            <div class="wa-name">Marcelo — Automação</div>
+            <div class="wa-role">(75) 99882-8918 · fiscina.marcelo@gmail.com</div>
+          </div>
+        </a>
+        <a href="https://wa.me/5575999448040?text=Olá!%20Gostaria%20de%20falar%20sobre%20Estruturas%20Metálicas." target="_blank" class="wa-btn">
+          <div class="wa-icon wa-orange">💬</div>
+          <div>
+            <div class="wa-name">Marlon — Estruturas Metálicas</div>
+            <div class="wa-role">(75) 99944-8040 · Eng.marlon.fiscina@gmail.com</div>
+          </div>
+        </a>
+      </div>
+    </div>
+    <div class="contact-info">
+      <div class="info-row">
+        <div class="info-icon">📍</div>
+        <div>
+          <div class="info-label">Localização</div>
+          <div class="info-val">Catu, Alagoinhas e Pojuca — BA<br><small style="color:var(--dim);font-size:.8rem">Disponível para projetos em todo o estado</small></div>
+        </div>
+      </div>
+      <div class="info-row">
+        <div class="info-icon">🏢</div>
+        <div>
+          <div class="info-label">Empresa</div>
+          <div class="info-val">Fiscina Serviços Técnicos Ltda<br><small style="color:var(--dim);font-size:.8rem">CNPJ: 24.064.246/0001-95 · Fundada em 2016</small></div>
+        </div>
+      </div>
+      <div class="info-row">
+        <div class="info-icon">✉️</div>
+        <div>
+          <div class="info-label">E-mails</div>
+          <div class="info-val">
+            <a href="mailto:fiscina.marcelo@gmail.com">fiscina.marcelo@gmail.com</a><br>
+            <a href="mailto:Eng.marlon.fiscina@gmail.com">Eng.marlon.fiscina@gmail.com</a>
+          </div>
+        </div>
+      </div>
+      <div class="info-row">
+        <div class="info-icon">🔗</div>
+        <div>
+          <div class="info-label">LinkedIn</div>
+          <div class="info-val"><a href="https://linkedin.com/in/marcelo-fiscina" target="_blank">linkedin.com/in/marcelo-fiscina</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">FISCINA <span>Serviços Técnicos</span></div>
+      <p class="footer-tagline">Engenharia em estruturas metálicas e automação industrial e residencial para o Recôncavo Baiano e todo o estado da Bahia.</p>
+      <p class="footer-cnpj">CNPJ: 24.064.246/0001-95 · Fundada em 2016 · Alagoinhas, BA</p>
+    </div>
+    <div>
+      <h4>Soluções</h4>
+      <ul>
+        <li><a href="#solucoes">Automação Industrial</a></li>
+        <li><a href="#solucoes">Estruturas Metálicas</a></li>
+        <li><a href="#solucoes">Automação Residencial</a></li>
+        <li><a href="#solucoes">Consultoria</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Contato</h4>
+      <ul>
+        <li><a href="https://wa.me/5575998828918" target="_blank">(75) 99882-8918 — Marcelo</a></li>
+        <li><a href="https://wa.me/5575999448040" target="_blank">(75) 99944-8040 — Marlon</a></li>
+        <li><a href="mailto:fiscina.marcelo@gmail.com">fiscina.marcelo@gmail.com</a></li>
+        <li><a href="https://linkedin.com/in/marcelo-fiscina" target="_blank">LinkedIn Marcelo</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2026 Fiscina Serviços Técnicos Ltda. Todos os direitos reservados.</span>
+    <div class="footer-links">
+      <a href="https://marcelofiscina.github.io/" target="_blank">Currículo — Marcelo Fiscina</a>
+    </div>
+  </div>
+</footer>
+
+
+<script>
+  function toggleMenu() {
+    document.getElementById('mobileMenu').classList.toggle('open');
+  }
+  document.addEventListener('click', function(e) {
+    const menu = document.getElementById('mobileMenu');
+    const ham = document.querySelector('.hamburger');
+    if (menu.classList.contains('open') && !menu.contains(e.target) && !ham.contains(e.target)) {
+      menu.classList.remove('open');
+    }
+  });
+
+  // Nav link active on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let cur = '';
+    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 80) cur = s.id; });
+    navLinks.forEach(a => { a.style.color = (a.getAttribute('href') === '#' + cur) ? 'var(--orange)' : ''; });
+  });
+
+  // Fade-in on scroll
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.style.opacity = '1'; e.target.style.transform = 'translateY(0)'; }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.svc-card, .svc-wide, .proj-card, .team-card, .why-card, .info-row, .wa-btn').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity .5s ease, transform .5s ease';
+    obs.observe(el);
+  });
+</script>
+
+</body>
+</html>
